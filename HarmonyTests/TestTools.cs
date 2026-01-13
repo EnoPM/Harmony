@@ -78,45 +78,33 @@ namespace HarmonyLibTests
 		// Also includes a workaround for Throws constraints reporting failed assertions within the test delegate as an unexpected
 		// AssertionException rather than just reporting the assertion failure message itself.
 
-		public static ConstraintResult AssertThat<TActual>(TActual actual, IResolveConstraint expression, string message = null, params object[] args)
+		public static ConstraintResult AssertThat<TActual>(TActual actual, IResolveConstraint expression, Func<string> getExceptionMessage = null)
 		{
 			var capture = new CaptureResultConstraint(expression);
-			Assert.That(actual, capture, message, args);
+			if (getExceptionMessage != null)
+				Assert.That(actual, capture, getExceptionMessage);
+			else
+				Assert.That(actual, capture);
 			return capture.capturedResult;
 		}
 
-		public static ConstraintResult AssertThat<TActual>(TActual actual, IResolveConstraint expression, Func<string> getExceptionMessage)
-		{
-			var capture = new CaptureResultConstraint(expression);
-			Assert.That(actual, capture, getExceptionMessage);
-			return capture.capturedResult;
-		}
-
-		public static ConstraintResult AssertThat<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, string message = null, params object[] args)
+		public static ConstraintResult AssertThat<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, Func<string> getExceptionMessage = null)
 		{
 			var capture = new CaptureResultConstraint(expr);
-			Assert.That(del, capture, message, args);
+			if (getExceptionMessage != null)
+				Assert.That(del, capture, getExceptionMessage);
+			else
+				Assert.That(del, capture);
 			return capture.capturedResult;
 		}
 
-		public static ConstraintResult AssertThat<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, Func<string> getExceptionMessage)
-		{
-			var capture = new CaptureResultConstraint(expr);
-			Assert.That(del, capture, getExceptionMessage);
-			return capture.capturedResult;
-		}
-
-		public static ConstraintResult AssertThat(TestDelegate code, IResolveConstraint constraint, string message = null, params object[] args)
+		public static ConstraintResult AssertThat(TestDelegate code, IResolveConstraint constraint, Func<string> getExceptionMessage = null)
 		{
 			var capture = new CaptureResultConstraint(constraint);
-			Assert.That(code, capture, message, args);
-			return capture.capturedResult;
-		}
-
-		public static ConstraintResult AssertThat(TestDelegate code, IResolveConstraint constraint, Func<string> getExceptionMessage)
-		{
-			var capture = new CaptureResultConstraint(constraint);
-			Assert.That(code, capture, getExceptionMessage);
+			if (getExceptionMessage != null)
+				Assert.That(code, capture, getExceptionMessage);
+			else
+				Assert.That(code, capture);
 			return capture.capturedResult;
 		}
 

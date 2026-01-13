@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net35;net452;net48;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
+		<TargetFramework>net10.0</TargetFramework>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>preview</LangVersion>
 		<IsPackable>false</IsPackable>
-		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
@@ -25,10 +24,5 @@
 		<DebugType>none</DebugType>
 		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<!-- Reference assemblies are needed for non-Windows .NET Framework targeting builds. -->
-		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
-	</ItemGroup>
 
 </Project>

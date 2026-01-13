@@ -35,7 +35,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 0, 1, 2 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -62,7 +62,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 8, 7, 6, 5, 4, 3, 2, 1, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -85,7 +85,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 3, 2, 4, 0, 1 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -107,7 +107,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 1, 2, 3, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -130,7 +130,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 0, 2, 3, 1, 4 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -153,7 +153,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 0, 1, 2, 3, 4 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -176,7 +176,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 4, 3, 2, 1, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -198,7 +198,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 2, 1, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -220,7 +220,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 2, 1, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -247,7 +247,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 4, 3, 5, 7, 6, 2, 1, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -274,7 +274,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 4, 3, 5, 7, 6, 2, 1, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -296,7 +296,7 @@ namespace HarmonyLibTests.Patching
 			var expectedOrder = new[] { 1, 2, 0 };
 			var methods = PatchFunctions.GetSortedPatchMethods(null, patchInstances, false);
 			for (var i = 0; i < expectedOrder.Length; i++)
-				Assert.AreSame(patches[expectedOrder[i]], methods[i],
+				ClassicAssert.AreSame(patches[expectedOrder[i]], methods[i],
 					$"#{i} Expected: {patches[expectedOrder[i]].FullDescription()}, Got: {methods[i].FullDescription()}");
 		}
 
@@ -318,19 +318,19 @@ namespace HarmonyLibTests.Patching
 
 			var sorter = new PatchSorter(patchInstances, false);
 
-			Assert.True(sorter.ComparePatchLists(patchInstances), "Same array");
-			Assert.True(sorter.ComparePatchLists([.. patchInstances.Reverse()]), "Patch array reversed");
-			Assert.False(sorter.ComparePatchLists([.. patchInstances.Take(2)]), "Sub-array of the original");
+			ClassicAssert.True(sorter.ComparePatchLists(patchInstances), "Same array");
+			ClassicAssert.True(sorter.ComparePatchLists([.. patchInstances.Reverse()]), "Patch array reversed");
+			ClassicAssert.False(sorter.ComparePatchLists([.. patchInstances.Take(2)]), "Sub-array of the original");
 			patchInstances[1] = new Patch(patches[1], 1, "owner B", Priority.High, ["owner A"], ["owner C"], false);
-			Assert.False(sorter.ComparePatchLists(patchInstances), "Priority of patch changed");
+			ClassicAssert.False(sorter.ComparePatchLists(patchInstances), "Priority of patch changed");
 			patchInstances[1] = new Patch(patches[1], 2, "owner B", Priority.Normal, ["owner A"], ["owner C"], false);
-			Assert.False(sorter.ComparePatchLists(patchInstances), "Index of patch changed");
+			ClassicAssert.False(sorter.ComparePatchLists(patchInstances), "Index of patch changed");
 			patchInstances[1] = new Patch(patches[1], 1, "owner D", Priority.Normal, ["owner A"], ["owner C"], false);
-			Assert.False(sorter.ComparePatchLists(patchInstances), "Owner of patch changed");
+			ClassicAssert.False(sorter.ComparePatchLists(patchInstances), "Owner of patch changed");
 			patchInstances[1] = new Patch(patches[1], 1, "owner B", Priority.Normal, ["owner D"], ["owner C"], false);
-			Assert.False(sorter.ComparePatchLists(patchInstances), "Before of patch changed");
+			ClassicAssert.False(sorter.ComparePatchLists(patchInstances), "Before of patch changed");
 			patchInstances[1] = new Patch(patches[1], 1, "owner B", Priority.Normal, ["owner A"], ["owner D"], false);
-			Assert.False(sorter.ComparePatchLists(patchInstances), "After of patch changed");
+			ClassicAssert.False(sorter.ComparePatchLists(patchInstances), "After of patch changed");
 		}
 	}
 }

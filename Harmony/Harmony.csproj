@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net35;net452;netstandard2.0</TargetFrameworks>
+        <TargetFramework>net10.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Product>HarmonyX</Product>
         <Company>BepInEx</Company>
@@ -22,7 +22,6 @@
         <LangVersion>latest</LangVersion>
         <DefaultItemExcludes>$(DefaultItemExcludes);Documentation/**</DefaultItemExcludes>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-        <CheckEolTargetFramework>false</CheckEolTargetFramework>
         <Version>$(HarmonyXVersion)</Version>
         <AssemblyVersion>$(HarmonyXVersionFull)</AssemblyVersion>
         <FileVersion>$(HarmonyXVersionFull)</FileVersion>
@@ -61,18 +60,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- Reference assemblies are needed for non-Windows .NET Framework targeting builds. -->
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
-
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    </ItemGroup>
-
-    <ItemGroup Condition="$(TargetFramework)=='netstandard2.0'">
-        <!-- Adding System.Reflection.Emit.* because there are public types exposed from its's package -->
-        <PackageReference Include="System.Reflection.Emit" Version="4.7.0" IncludeAssets="compile" />
-
-        <!-- Minimal suitable major version -->
-        <PackageReference Include="System.Text.Json" Version="5.0.2" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.102" PrivateAssets="All" />
     </ItemGroup>
 
     <Target Name="RemoveOldNuGetPackages" BeforeTargets="PreBuildEvent">

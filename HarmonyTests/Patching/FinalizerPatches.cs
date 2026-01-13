@@ -22,12 +22,12 @@ namespace HarmonyLibTests.Patching
 			{
 				progress = new();
 				Class.Test();
-				Assert.Fail("Should throw an exception");
+				ClassicAssert.Fail("Should throw an exception");
 			}
 			catch (Exception ex)
 			{
 				var result = progress.Append($"-> {ex?.Message ?? "-"}").ToString();
-				Assert.AreEqual("Finalizer 2 E0 -> E-2\nFinalizer 1 E-2 -> E-1\n-> E-1", result);
+				ClassicAssert.AreEqual("Finalizer 2 E0 -> E-2\nFinalizer 1 E-2 -> E-1\n-> E-1", result);
 			}
 		}
 
@@ -255,7 +255,7 @@ namespace HarmonyLibTests.Patching
 		public static void SkipIfMono()
 		{
 			if (AccessTools.IsMonoRuntime)
-				Assert.Ignore("Mono runtime cannot handle invalid IL in dead code. Test ignored.");
+				ClassicAssert.Ignore("Mono runtime cannot handle invalid IL in dead code. Test ignored.");
 		}
 
 		public static void Patch()
@@ -265,18 +265,18 @@ namespace HarmonyLibTests.Patching
 			var originalType = AccessTools.TypeByName("HarmonyLibTests.Assets." + parts[1]);
 			var patchType = AccessTools.TypeByName("HarmonyLibTests.Assets." + parts[2]);
 
-			Assert.NotNull(originalType, nameof(originalType));
+			ClassicAssert.NotNull(originalType, nameof(originalType));
 			var originalMethod = originalType.GetMethod("Method");
-			Assert.NotNull(originalMethod, nameof(originalMethod));
+			ClassicAssert.NotNull(originalMethod, nameof(originalMethod));
 
-			Assert.NotNull(patchType, nameof(patchType));
+			ClassicAssert.NotNull(patchType, nameof(patchType));
 			var finalizer = patchType.GetMethod("Finalizer");
-			Assert.NotNull(finalizer, nameof(finalizer));
+			ClassicAssert.NotNull(finalizer, nameof(finalizer));
 
 			var instance = new Harmony("finalizer-test");
 			instance.UnpatchSelf();
 			var patcher = instance.CreateProcessor(originalMethod);
-			Assert.NotNull(patcher, nameof(patcher));
+			ClassicAssert.NotNull(patcher, nameof(patcher));
 			_ = patcher.AddFinalizer(finalizer);
 			_ = patcher.Patch();
 
@@ -286,7 +286,7 @@ namespace HarmonyLibTests.Patching
 
 			var obj = Activator.CreateInstance(originalType);
 			var m_method = AccessTools.Method(originalType, "Method");
-			Assert.NotNull(m_method, nameof(m_method));
+			ClassicAssert.NotNull(m_method, nameof(m_method));
 			info = [];
 			try
 			{
@@ -301,56 +301,56 @@ namespace HarmonyLibTests.Patching
 				info["outerexception"] = e.InnerException;
 			}
 			trv.Fields().ForEach(name => info[name] = trv.Field(name).GetValue());
-			Assert.True((bool)info["finalized"], "Finalizer not called");
+			ClassicAssert.True((bool)info["finalized"], "Finalizer not called");
 		}
 
 		private void AssertGotResult(string str)
 		{
-			Assert.NotNull(str, "str should not be null");
-			Assert.NotNull(info, "info should not be null");
-			Assert.True(info.ContainsKey("result"), "Should return result");
-			Assert.AreEqual(str, info["result"]);
+			ClassicAssert.NotNull(str, "str should not be null");
+			ClassicAssert.NotNull(info, "info should not be null");
+			ClassicAssert.True(info.ContainsKey("result"), "Should return result");
+			ClassicAssert.AreEqual(str, info["result"]);
 		}
 
 		private void AssertGotNullResult()
 		{
-			Assert.NotNull(info, "info should not be null");
-			Assert.True(info.ContainsKey("result"), "Should return result");
-			Assert.Null(info["result"], "Result should be null");
+			ClassicAssert.NotNull(info, "info should not be null");
+			ClassicAssert.True(info.ContainsKey("result"), "Should return result");
+			ClassicAssert.Null(info["result"], "Result should be null");
 		}
 
 		private void AssertGotNoResult()
 		{
-			Assert.NotNull(info, "info should not be null");
-			Assert.False(info.ContainsKey("result"), "Should not return result");
+			ClassicAssert.NotNull(info, "info should not be null");
+			ClassicAssert.False(info.ContainsKey("result"), "Should not return result");
 		}
 
 		private void AssertNoThrownException()
 		{
-			Assert.NotNull(info, "info should not be null");
-			Assert.Null(info["outerexception"], "Should not throw an exception");
+			ClassicAssert.NotNull(info, "info should not be null");
+			ClassicAssert.Null(info["outerexception"], "Should not throw an exception");
 		}
 
 		private void AssertThrownException<E>()
 		{
-			Assert.NotNull(info, "info should not be null");
-			Assert.NotNull(info["outerexception"], "Should throw an exception");
-			Assert.IsInstanceOf<E>(info["outerexception"]);
+			ClassicAssert.NotNull(info, "info should not be null");
+			ClassicAssert.NotNull(info["outerexception"], "Should throw an exception");
+			ClassicAssert.IsInstanceOf<E>(info["outerexception"]);
 		}
 
 		private void AssertNullExceptionInput()
 		{
-			Assert.NotNull(info, "info should not be null");
-			Assert.True(info.ContainsKey("exception"), "Finalizer should have an exception field");
-			Assert.Null(info["exception"], "Finalizer should get null exception input");
+			ClassicAssert.NotNull(info, "info should not be null");
+			ClassicAssert.True(info.ContainsKey("exception"), "Finalizer should have an exception field");
+			ClassicAssert.Null(info["exception"], "Finalizer should get null exception input");
 		}
 
 		private void AssertExceptionInput<E>()
 		{
-			Assert.NotNull(info, "info should not be null");
-			Assert.True(info.ContainsKey("exception"), "Finalizer should have an exception field");
-			Assert.NotNull(info["exception"], "Finalizer should get an exception input");
-			Assert.IsInstanceOf<E>(info["exception"]);
+			ClassicAssert.NotNull(info, "info should not be null");
+			ClassicAssert.True(info.ContainsKey("exception"), "Finalizer should have an exception field");
+			ClassicAssert.NotNull(info["exception"], "Finalizer should get an exception input");
+			ClassicAssert.IsInstanceOf<E>(info["exception"]);
 		}
 	}
 }

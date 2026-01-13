@@ -26,10 +26,10 @@ namespace HarmonyLibTests.IL
 		public void Test_Read_WeirdMethodWithGoto()
 		{
 			var method = SymbolExtensions.GetMethodInfo(() => WeirdMethodWithGoto());
-			Assert.NotNull(method);
+			ClassicAssert.NotNull(method);
 			var instructions = PatchProcessor.GetOriginalInstructions(method);
-			Assert.NotNull(instructions);
-			Assert.Greater(instructions.Count, 0);
+			ClassicAssert.NotNull(instructions);
+			ClassicAssert.Greater(instructions.Count, 0);
 		}
 	}
 }
