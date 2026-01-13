@@ -7,12 +7,13 @@
         <Company>BepInEx</Company>
         <Copyright>Copyright © BepInEx 2022</Copyright>
         <Description>A general non-destructive patch library for .NET and Mono modules</Description>
-        <PackageId>HarmonyX</PackageId>
+        <PackageId>EnoPM.HarmonyX</PackageId>
         <Authors>Andreas Pardeike, Geoffrey Horsington, ManlyMarco et al.</Authors>
         <AssemblyName>0Harmony</AssemblyName>
         <SignAssembly>true</SignAssembly>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageProjectUrl>https://github.com/BepInEx/HarmonyX</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/EnoPM/Harmony</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/EnoPM/Harmony</RepositoryUrl>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageTags>Harmony,Mono,Patch,Patching,Runtime,Detour,Detours,Aspect,Aspects</PackageTags>
         <PackageIcon>logo_mini.png</PackageIcon>
