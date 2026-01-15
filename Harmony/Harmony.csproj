@@ -55,13 +55,9 @@
         <DebugType>portable</DebugType>
         <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
-    
-    <PropertyGroup>
-        <MonoModSolution>D:\Projects\MonoMod</MonoModSolution>
-    </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="$(MonoModSolution)\src\MonoMod.RuntimeDetour\MonoMod.RuntimeDetour.csproj"/>
+        <PackageReference Include="EnoPM.MonoMod.RuntimeDetour" Version="$(MonoModRuntimeDetour)" />
     </ItemGroup>
 
     <ItemGroup>
