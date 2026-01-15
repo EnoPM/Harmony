@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -46,11 +47,20 @@ namespace HarmonyLib
 		public Type CreateDelegateType(Type returnType, Type[] argTypes, CallingConvention? convention)
 		{
 			counter++;
-			var assembly = AssemblyDefinition.CreateAssembly(
-				new AssemblyNameDefinition($"HarmonyDTFAssembly{counter}", new Version(1, 0)),
-				$"HarmonyDTFModule{counter}", ModuleKind.Dll);
 
-			var module = assembly.MainModule;
+			// Create an assembly resolver configured with the .NET runtime directory
+			// This is needed for .NET 10+ where Cecil needs to resolve System.Private.CoreLib
+			var resolver = new DefaultAssemblyResolver();
+			var runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+			if (!string.IsNullOrEmpty(runtimeDir) && Directory.Exists(runtimeDir))
+				resolver.AddSearchDirectory(runtimeDir);
+
+			var module = ModuleDefinition.CreateModule($"HarmonyDTFModule{counter}", new ModuleParameters
+			{
+				Kind = ModuleKind.Dll,
+				AssemblyResolver = resolver
+			});
+			module.Assembly.Name = new AssemblyNameDefinition($"HarmonyDTFAssembly{counter}", new Version(1, 0));
 			var dtfType = new TypeDefinition("", $"HarmonyDTFType{counter}",
 				TypeAttributes.Sealed | TypeAttributes.Public)
 			{
@@ -83,7 +93,7 @@ namespace HarmonyLib
 			invokeMethod.Parameters.AddRange(argTypes.Select(t => new ParameterDefinition(module.ImportReference(t))));
 			dtfType.Methods.Add(invokeMethod);
 
-			var loadedAss = ReflectionHelper.Load(assembly.MainModule);
+			var loadedAss = ReflectionHelper.Load(module);
 			var delegateType = loadedAss.GetType($"HarmonyDTFType{counter}");
 			return delegateType;
 		}

@@ -54,10 +54,20 @@ internal static class CecilEmitter
 
 		var name = $"HarmonyDump.{SanitizeTypeName(md.GetID(withType: false, simple: true))}.{Guid.NewGuid().GetHashCode():X8}";
 		var originalName = (original?.Name ?? md.Name).Replace('.', '_');
+
+		// Create an assembly resolver configured with the .NET runtime directory
+		// This is needed for .NET 10+ where Cecil needs to resolve System.Private.CoreLib
+		var resolver = new DefaultAssemblyResolver();
+		var runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+		if (!string.IsNullOrEmpty(runtimeDir) && Directory.Exists(runtimeDir))
+			resolver.AddSearchDirectory(runtimeDir);
+
 		var module = ModuleDefinition.CreateModule(name,
 			new ModuleParameters
 			{
-				Kind = ModuleKind.Dll, ReflectionImporterProvider = MMReflectionImporter.ProviderNoDefault
+				Kind = ModuleKind.Dll,
+				ReflectionImporterProvider = MMReflectionImporter.ProviderNoDefault,
+				AssemblyResolver = resolver
 			});
 
 		module.Assembly.CustomAttributes.Add(
